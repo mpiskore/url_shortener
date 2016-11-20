@@ -14,7 +14,6 @@ class Command(BaseCommand):
         parser.add_argument('user_count', nargs='+', type=int)
 
     def handle(self, *args, **options):
-        import ipdb; ipdb.set_trace()
         duplicated_users = 0
         user_count = options['user_count'][0]
 
