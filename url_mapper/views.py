@@ -37,12 +37,12 @@ class HomePage(FormView):
         return redirect('result', shortened=new_url.shortened_url)
 
     def _prepare_message(self, url_object):
-        shortened = self._get_original_url(url_object)
+        shortened = self._get_shortened_url(url_object)
         message_text = 'Shortened URL address for {0} is <a href="{1}">{1}</a>'
         message = message_text.format(url_object.original_url, shortened)
         messages.add_message(self.request, messages.INFO, message)
 
-    def _get_original_url(self, url_object):
+    def _get_shortened_url(self, url_object):
         base = settings.BASE_URL
         return '/'.join((base, url_object.shortened_url))
 
