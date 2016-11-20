@@ -123,3 +123,9 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# configuration endpoint for setting the max length of generated URL
+SHORT_URL_MAX_LEN = 8
+
+# base App URL address
+BASE_URL = 'http://127.0.0.1:8000'
