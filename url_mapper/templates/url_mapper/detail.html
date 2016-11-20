@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title>Url Shortener</title>
+        <h1>Url Shortener</h1>
+    </head>
+
+    <body>
+        <ul>
+            <li>Original: {{ object.original_url }}</li>
+            <li>Generated: {{ object.shortened_url }}</li>
+            <li>User responsible:{{ object.user.first_name }} {{ object.user.last_name }}</li>
+        </ul>
+    </body>
+</html>
