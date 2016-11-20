@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect
@@ -24,12 +25,21 @@ class HomePage(FormView):
 
     def form_invalid(self, form):
         # redirect to already existing url
-        existing_url = UrlMapper.objects.get(
-            original_url=form.data['original_url'])
-        self._prepare_message(existing_url)
-        return redirect('result', shortened=existing_url.shortened_url)
+        try:
+            existing_url = UrlMapper.objects.get(
+                original_url=form.data['original_url'])
+            self._prepare_message(existing_url)
+            return redirect('result', shortened=existing_url.shortened_url)
+        except ObjectDoesNotExist:
+            messages.add_message(
+                self.request, messages.ERROR,
+                "You have no users in the database. You can add them "
+                "by running python manage.py create_fake_users N "
+                "where N is the number of users.")
+            return redirect('home')
 
     def form_valid(self, form):
+
         form.instance.user = User.objects.order_by('?').first()
         form.instance.shortened_url = UrlMapper.get_shortened_url()
         new_url = form.save()
