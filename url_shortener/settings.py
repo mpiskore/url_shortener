@@ -125,6 +125,7 @@ USE_TZ = False
 STATIC_URL = '/static/'
 
 # configuration endpoint for setting the max length of generated URL
+# WARNING: SHORT_URL_MAX_LEN should be lower than 64 (database limitation).
 SHORT_URL_MAX_LEN = 8
 
 # base App URL address
