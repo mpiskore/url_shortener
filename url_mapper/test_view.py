@@ -25,15 +25,11 @@ class UrlMapperViewTest(TestCase):
         response = self.client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
 
-    def test_shortening_new_url(self):
-        response = self.client.post(
-            reverse('home'), {'original_url': 'example.com'})
-        self.assertEqual(response.status_code, 302)  # redirected to result
-
     @mock.patch.object(UrlMapper, 'get_shortened_url', return_value='123456')
     @mock.patch.object(messages, 'add_message')
     def test_success_message(self, add_message_mock, shortenening_mock):
         response = self.client.post(reverse('home'), {'original_url': 'example.com'})
+        self.assertEqual(response.status_code, 302)  # redirected to result
         test_url = 'http://127.0.0.1:8000/123456'
         add_message_mock.assert_called_once_with(
             response.wsgi_request, messages.INFO, (
