@@ -16,21 +16,29 @@ simply clone the repo locally, prepare a virtualenv or pyenv and:
 
 prepare a database for local run purposes (by default it is a PostgeSQL database, but it can be changed in `settings.py`, as well as the user name and DB name):
 In `psql` client:
+
 `ALTER ROLE django SET client_encoding TO 'utf8';`
+
 `ALTER ROLE django SET default_transaction_isolation TO 'read committed';`
+
 `ALTER ROLE django SET timezone TO 'UTC';`
+
 `CREATE DATABASE url_shortener`
 
 And run the server in project's root directory:
+
 `./manage.py runserver`
 
 ## Testing:
 
 Setup the tools:
+
 `ALTER USER django CREATEDB`
+
 `pip install -r requirements_dev.txt`
 
 And run the tests:
+
 `./manage.py test`
 
 ## Future development:
