@@ -40,7 +40,17 @@ class HomePage(FormView):
             return redirect("home")
 
     def form_valid(self, form):
-        form.instance.user = User.objects.order_by("?").first()
+        random_user = User.objects.order_by("?").first()
+        if random_user is None:
+            messages.add_message(
+                self.request,
+                messages.ERROR,
+                "You have no users in the database. You can add them "
+                "by running python manage.py create_fake_users N "
+                "where N is the number of users.",
+            )
+            return redirect("home")
+        form.instance.user = random_user
         form.instance.shortened_url = UrlMapper.get_shortened_url()
         new_url = form.save()
         self._prepare_message(new_url)
