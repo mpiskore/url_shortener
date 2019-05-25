@@ -10,7 +10,7 @@ from url_mapper.models import UrlMapper
 
 
 class UrlDetail(DetailView):
-    template_name = 'url_mapper/detail.html'
+    template_name = "url_mapper/detail.html"
     model = UrlMapper
 
     def get_object(self):
@@ -20,31 +20,31 @@ class UrlDetail(DetailView):
 
 
 class HomePage(FormView):
-    template_name = 'url_mapper/home.html'
+    template_name = "url_mapper/home.html"
     form_class = UrlMapperForm
 
     def form_invalid(self, form):
         # redirect to already existing url
         try:
-            existing_url = UrlMapper.objects.get(
-                original_url=form.data['original_url'])
+            existing_url = UrlMapper.objects.get(original_url=form.data["original_url"])
             self._prepare_message(existing_url)
-            return redirect('result', shortened=existing_url.shortened_url)
+            return redirect("result", shortened=existing_url.shortened_url)
         except ObjectDoesNotExist:
             messages.add_message(
-                self.request, messages.ERROR,
+                self.request,
+                messages.ERROR,
                 "You have no users in the database. You can add them "
                 "by running python manage.py create_fake_users N "
-                "where N is the number of users.")
-            return redirect('home')
+                "where N is the number of users.",
+            )
+            return redirect("home")
 
     def form_valid(self, form):
-
-        form.instance.user = User.objects.order_by('?').first()
+        form.instance.user = User.objects.order_by("?").first()
         form.instance.shortened_url = UrlMapper.get_shortened_url()
         new_url = form.save()
         self._prepare_message(new_url)
-        return redirect('result', shortened=new_url.shortened_url)
+        return redirect("result", shortened=new_url.shortened_url)
 
     def _prepare_message(self, url_object):
         shortened = self._get_shortened_url(url_object)
@@ -54,13 +54,13 @@ class HomePage(FormView):
 
     def _get_shortened_url(self, url_object):
         base = settings.BASE_URL
-        return '/'.join((base, url_object.shortened_url))
+        return "/".join((base, url_object.shortened_url))
 
 
 def url_redirect(request, shortened=None):
     # TODO: consider handling ftp addresses as well
     original = UrlMapper.objects.get(shortened_url=shortened).original_url
-    if original.startswith('http'):
+    if original.startswith("http"):
         return redirect(original)
     else:
-        return redirect('http://' + original)
+        return redirect("http://" + original)

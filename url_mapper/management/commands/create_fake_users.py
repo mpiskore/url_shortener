@@ -8,27 +8,28 @@ from django.contrib.auth.models import User
 
 class Command(BaseCommand):
 
-    help = 'Creates multiple fake users using randomuser.me API.'
+    help = "Creates multiple fake users using randomuser.me API."
 
     def add_arguments(self, parser):
-        parser.add_argument('user_count', nargs='+', type=int)
+        parser.add_argument("user_count", nargs="+", type=int)
 
     def handle(self, *args, **options):
         duplicated_users = 0
-        user_count = options['user_count'][0]
+        user_count = options["user_count"][0]
 
-        response = requests.get("https://randomuser.me/api/?results={}".format(
-            user_count
-        ))
+        response = requests.get(
+            "https://randomuser.me/api/?results={}".format(user_count)
+        )
 
-        for user in response.json()['results']:
+        for user in response.json()["results"]:
             kwargs = {
-                'username': user['login']['username'],
-                'first_name': user['name']['first'],
-                'last_name': user['name']['last'],
-                'password': user['login']['password'],
-                'date_joined': datetime.strptime(
-                    user['registered'], '%Y-%m-%d %H:%M:%S'),
+                "username": user["login"]["username"],
+                "first_name": user["name"]["first"],
+                "last_name": user["name"]["last"],
+                "password": user["login"]["password"],
+                "date_joined": datetime.strptime(
+                    user["registered"], "%Y-%m-%d %H:%M:%S"
+                ),
             }
             try:
                 User.objects.create(**kwargs)
@@ -40,12 +41,13 @@ class Command(BaseCommand):
                 # the command for missing number of users.
                 duplicated_users += 1
 
-        self.stdout.write(self.style.SUCCESS(
-            'Successfully created {} users!'.format(
-                user_count - duplicated_users))
+        self.stdout.write(
+            self.style.SUCCESS(
+                "Successfully created {} users!".format(user_count - duplicated_users)
+            )
         )
 
         if duplicated_users > 0:
             # run the command again for all the users that were duplicated.
-            options['user_count'][0] = duplicated_users
+            options["user_count"][0] = duplicated_users
             self.handle(*args, **options)

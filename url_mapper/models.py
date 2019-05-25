@@ -13,8 +13,7 @@ class UrlMapper(models.Model):
 
     @classmethod
     def get_shortened_url(cls):
-        char_pool = (string.ascii_lowercase + string.ascii_uppercase + string.digits)
-        return ''.join([
-            random.choice(char_pool)
-            for _ in range(settings.SHORT_URL_MAX_LEN)
-        ])
+        char_pool = string.ascii_lowercase + string.ascii_uppercase + string.digits
+        return "".join(
+            [random.choice(char_pool) for _ in range(settings.SHORT_URL_MAX_LEN)]
+        )

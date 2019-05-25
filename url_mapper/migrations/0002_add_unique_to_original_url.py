@@ -7,14 +7,12 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('url_mapper', '0001_initial'),
-    ]
+    dependencies = [("url_mapper", "0001_initial")]
 
     operations = [
         migrations.AlterField(
-            model_name='urlmapper',
-            name='original_url',
+            model_name="urlmapper",
+            name="original_url",
             field=models.CharField(max_length=512, unique=True),
-        ),
+        )
     ]
