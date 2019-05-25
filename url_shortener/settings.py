@@ -77,11 +77,11 @@ WSGI_APPLICATION = 'url_shortener.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'url_shortener',
-        'USER': 'url_shortener',
-        'PASSWORD': 'url_shortener',
-        'HOST': 'localhost',
-        'PORT': '',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'pass123',
+        'HOST': 'db',
+        'PORT': '5432',
     }
 }
 

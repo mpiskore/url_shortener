@@ -7,7 +7,7 @@ from django.db import models
 
 
 class UrlMapper(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     original_url = models.CharField(max_length=512, unique=True)
     shortened_url = models.CharField(max_length=64)
 
