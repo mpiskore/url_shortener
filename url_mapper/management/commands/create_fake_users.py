@@ -28,7 +28,7 @@ class Command(BaseCommand):
                 "last_name": user["name"]["last"],
                 "password": user["login"]["password"],
                 "date_joined": datetime.strptime(
-                    user["registered"], "%Y-%m-%d %H:%M:%S"
+                    user["registered"]["date"], "%Y-%m-%dT%H:%M:%SZ"
                 ),
             }
             try:
