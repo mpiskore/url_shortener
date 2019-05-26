@@ -3,16 +3,14 @@ version: '3'
 services:
   db:
     image: postgres:latest
-    # restart: always
+    restart: always
     environment:
       POSTGRES_PASSWORD: pass123
     volumes:
       - postgres_data:/var/lib/postgresql/data/
   web:
     build: .
-    command: bash -c "echo $PATH && python manage.py makemigrations && \
-             python manage.py migrate --noinput && \
-             python manage.py runserver 0.0.0.0:8000"
+    command: ./run.sh
     volumes:
       - .:/code
     ports:

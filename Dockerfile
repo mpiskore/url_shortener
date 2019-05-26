@@ -1,14 +1,14 @@
-FROM python:3.6
+FROM python:3.7
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
+RUN mkdir /code
 WORKDIR /code
 
-COPY . /code/
-# COPY requirements.txt requirements.txt
-# COPY manage.py manage.py
-# COPY url_mapper url_mapper
-# COPY url_shortener url_shortener
+COPY requirements.txt /code/
+COPY run.sh /code/
 
-RUN pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
+
+COPY . /code/
