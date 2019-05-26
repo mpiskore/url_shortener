@@ -10,7 +10,7 @@ services:
       - postgres_data:/var/lib/postgresql/data/
   web:
     build: .
-    command: bash -c "./run.sh"
+    command: ./run.sh
     volumes:
       - .:/code
     ports:
