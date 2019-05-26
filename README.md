@@ -1,33 +1,17 @@
 # Url Shortener
 ### An application for shortening URL addresses.
 
+## Installation:
+
+Assure that docker and docker-compose are installed, and:
+
+`docker-compose run --build`
+
 ## Usage:
-Run the server locally with `./manage.py runserver` and check out the fancy web app.
 
 You can add URL addresses, application will shorten them for you (unless they have been already short, like, for example, `wp.pl` ;) ) and you will be able to access the provided url with its shorten version immediately or share with friends for later use!
 
 You can also check the information on given shorten URL by preceding the url with an exclemation mark (!). Don't worry about the odd username - we fake all the user data!
-
-## Installation:
-
-simply clone the repo locally, prepare a virtualenv or pyenv and:
-
-`pip install -r requirements.txt`
-
-prepare a database for local run purposes (by default it is a PostgeSQL database, but it can be changed in `settings.py`, as well as the user name and DB name):
-In `psql` client:
-
-`ALTER ROLE django SET client_encoding TO 'utf8';`
-
-`ALTER ROLE django SET default_transaction_isolation TO 'read committed';`
-
-`ALTER ROLE django SET timezone TO 'UTC';`
-
-`CREATE DATABASE url_shortener`
-
-And run the server in project's root directory:
-
-`./manage.py runserver`
 
 ## Testing:
 
