@@ -2,8 +2,7 @@ import mock
 
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.core.handlers.wsgi import WSGIRequest
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.test import Client, TestCase
 
 from url_mapper.models import UrlMapper

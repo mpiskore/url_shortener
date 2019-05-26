@@ -15,15 +15,7 @@ You can also check the information on given shorten URL by preceding the url wit
 
 ## Testing:
 
-Setup the tools:
-
-`ALTER USER django CREATEDB`
-
-`pip install -r requirements_dev.txt`
-
-And run the tests:
-
-`./manage.py test`
+`docker-compose run web ./test.sh`
 
 ## Future development:
 
