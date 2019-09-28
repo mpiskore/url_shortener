@@ -4,3 +4,4 @@ notes.txt
 src/url_shortener/settings/local.py
 .idea/
 env/
+src/postgres

@@ -10,9 +10,9 @@ services:
       - postgres_data:/var/lib/postgresql/data/
   web:
     build: .
-    command: ./run.sh
+    command: /code/run.sh
     volumes:
-      - .:/code
+      - ./src:/code
     ports:
       - 8000:8000
     depends_on:
@@ -20,3 +20,5 @@ services:
 
 volumes:
   postgres_data:
+    driver: local
+
