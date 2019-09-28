@@ -1,4 +1,7 @@
 __pycache__
 *.pyc
 notes.txt
-url_shortener/settings/local.py
+src/url_shortener/settings/local.py
+.idea/
+env/
+src/postgres

@@ -13,7 +13,7 @@ class UrlDetail(DetailView):
     template_name = "url_mapper/detail.html"
     model = UrlMapper
 
-    def get_object(self):
+    def get_object(self, **kwargs):
         # remove unnecessary backslashes and exclamation mark from url
         shortened_url = self.request.path[2:-1]
         return get_object_or_404(UrlMapper, shortened_url=shortened_url)
@@ -63,6 +63,7 @@ class HomePage(FormView):
         messages.add_message(self.request, messages.INFO, message)
 
     def _get_shortened_url(self, url_object):
+        # FIXME: use pathlib instead of OS-dependent slash-joining strings
         base = settings.BASE_URL
         return "/".join((base, url_object.shortened_url))
 
