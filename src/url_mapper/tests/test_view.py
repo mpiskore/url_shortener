@@ -30,7 +30,5 @@ class UrlMapperViewTest(TestCase):
         add_message_mock.assert_called_once_with(
             response.wsgi_request,
             messages.INFO,
-            ('Shortened URL address for example.com is <a href="{0}">{0}</a>').format(
-                test_url
-            ),
+            f'Shortened URL address for example.com is <a href="{test_url}">{test_url}</a>',
         )
