@@ -17,9 +17,7 @@ class Command(BaseCommand):
         duplicated_users = 0
         user_count = options["user_count"][0]
 
-        response = requests.get(
-            "https://randomuser.me/api/?results={}".format(user_count)
-        )
+        response = requests.get(f"https://randomuser.me/api/?results={user_count}")
 
         for user in response.json()["results"]:
             kwargs = {
@@ -43,7 +41,7 @@ class Command(BaseCommand):
 
         self.stdout.write(
             self.style.SUCCESS(
-                "Successfully created {} users!".format(user_count - duplicated_users)
+                f"Successfully created {user_count - duplicated_users} users!"
             )
         )
 

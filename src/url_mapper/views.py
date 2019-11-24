@@ -58,8 +58,7 @@ class HomePage(FormView):
 
     def _prepare_message(self, url_object):
         shortened = self._get_shortened_url(url_object)
-        message_text = 'Shortened URL address for {0} is <a href="{1}">{1}</a>'
-        message = message_text.format(url_object.original_url, shortened)
+        message = f'Shortened URL address for {url_object.original_url} is <a href="{shortened}">{shortened}</a>'
         messages.add_message(self.request, messages.INFO, message)
 
     def _get_shortened_url(self, url_object):
