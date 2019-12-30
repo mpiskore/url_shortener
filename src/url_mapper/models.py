@@ -4,12 +4,15 @@ import string
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.query import QuerySet
 
 
 class UrlMapper(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     original_url = models.CharField(max_length=512, unique=True)
     shortened_url = models.CharField(max_length=64)
+
+    objects: QuerySet  # linting purposes
 
     @classmethod
     def get_shortened_url(cls):
