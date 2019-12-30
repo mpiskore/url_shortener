@@ -1,5 +1,4 @@
 import pytest
-from django.conf import settings
 
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -27,7 +26,7 @@ def test_success_message(client, mocker):
     add_message_mock = mocker.patch.object(messages, "add_message")
     response = client.post(reverse("home"), {"original_url": "example.com"})
     assert response.status_code, 302  # redirected to result
-    test_url = settings.BASE_URL + "/123456"
+    test_url = "http://testserver/123456"
     add_message_mock.assert_called_once_with(
         response.wsgi_request,
         messages.INFO,
