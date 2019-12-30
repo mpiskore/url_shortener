@@ -1,0 +1,4 @@
+pytest-django
+pytest-mock
+black
+flake8

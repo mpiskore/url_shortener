@@ -3,7 +3,7 @@ import pytest
 import requests
 
 from django.core.management import call_command
-from django.utils.six import StringIO
+from six import StringIO
 
 FAKE_USERS_COUNT = 10
 

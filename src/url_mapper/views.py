@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -63,9 +62,9 @@ class HomePage(FormView):
         messages.add_message(self.request, messages.INFO, message)
 
     def _get_shortened_url(self, url_object):
-        # FIXME: use pathlib instead of OS-dependent slash-joining strings
-        base = settings.BASE_URL
-        return "/".join((base, url_object.shortened_url))
+        # FIXME: use urllib instead of OS-dependent slash-joining strings
+        base_uri = self.request.build_absolute_uri()
+        return f"{base_uri}{url_object.shortened_url}"
 
 
 def url_redirect(request, shortened=None):
